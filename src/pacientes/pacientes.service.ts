@@ -11,19 +11,19 @@ export class PacientesService {
     @InjectModel('Pacientes') private readonly pacientesModel: Model<Pacientes>,
   ) {}
 
-  create(createPacienteDto: CreatePacienteDto) {
-    const newPaciente = new this.pacientesModel(createPacienteDto);
+  async create(createPacienteDto: CreatePacienteDto) {
+    const newPaciente = await new this.pacientesModel(createPacienteDto);
     return newPaciente.save();
   }
-  findAll() {
-    const pacientes = this.pacientesModel.find();
+  async findAll() {
+    const pacientes = await this.pacientesModel.find();
     return pacientes;
   }
-  findOne(id: number) {
-    const paciente = this.pacientesModel.findById(id);
+  async findOne(_id: string) {
+    const paciente = await this.pacientesModel.findById(_id);
     return paciente;
   }
-  update(id: number, updatePacienteDto: UpdatePacienteDto) {
+  update(id: string, updatePacienteDto: UpdatePacienteDto) {
     const updatedPaciente = this.pacientesModel.findByIdAndUpdate(
       id,
       updatePacienteDto,
@@ -31,8 +31,8 @@ export class PacientesService {
     );
     return updatedPaciente;
   }
-  remove(id: number) {
-    const deletedPaciente = this.pacientesModel.findOneAndDelete(id);
+  remove(_id: any) {
+    const deletedPaciente = this.pacientesModel.findOneAndRemove(_id);
     return deletedPaciente;
   }
 }
