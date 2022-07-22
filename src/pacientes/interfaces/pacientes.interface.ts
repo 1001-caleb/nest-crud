@@ -5,9 +5,9 @@ export interface Pacientes extends Document {
   readonly apellido: string;
   readonly edad: number;
   readonly identificacion: number;
-  readonly nombre_acompañante?: string;
-  readonly apellido_acompañante?: string;
-  readonly edad_acompañante?: number;
-  readonly identificacion_acompañante?: number;
+  readonly nombre_acompanante?: string;
+  readonly apellido_acompanante?: string;
+  readonly edad_acompanante?: number;
+  readonly identificacion_acompanante?: number;
   readonly createdAt: Date;
 }
