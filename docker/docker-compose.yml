@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  mydb:
+    container_name: pacientes
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=parra
+      - MONGO_INITDB_ROOT_PASSWORD=mrcaleb7
+      - MONGO_INITDB_DATABASE=pacientes
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./data/mongo-db:/data/db
+
+    myapp:
+      container_name: pacientes
+      build:
+        context: ..
+        dockerfile: docker/Dockerfile
+      volumes:
+        - ../:/usr/src/app
+        - /usr/src/app/node_modules
+      ports:
+        - "3000:3000"
+        - "9229:9229"
+        
